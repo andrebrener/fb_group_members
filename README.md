@@ -15,16 +15,16 @@ Go in the directory of the repo and run:
 
 ### 3. Insert constants
 
-In [constants.py](link) insert:
+In [constants.py](https://github.com/andrebrener/fb_group_members/blob/master/constants.py) insert:
 - `USER`: Facebook mail or username.
 - `PASS`: Password.
 - `NUMBER_OF_SCROLLS`: Number of scrolls to the bottom of the page. This is done
   because members are loaded as the web is navigated.
-- `GROUP_MEMBERS_LINK`: The link of the group members. Eg: https://www.facebook.com/groups/<group_id>/members/.
+- `GROUP_MEMBERS_LINK`: The link of the group members. Eg: `https://www.facebook.com/groups/<group_id>/members/`.
 
 ### 3. Get names of group members :)
 
-- Run [get_members.py](link).
+- Run [get_members.py](https://github.com/andrebrener/fb_group_members/blob/master/get_members.py).
 - A directory named `results` will be created in the repo with a csv file named `group_members.csv`.
 
 
