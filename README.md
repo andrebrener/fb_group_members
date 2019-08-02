@@ -2,6 +2,8 @@
 
 Get all the names of the members of a facebook group. The scripts are written and intended to use with Python 3.7.
 
+To use this app, you should be able to see the group members. This means that in a closed or secret group, you'll have to be a member.
+
 ## Getting Started
 
 ### 1. Clone Repo
