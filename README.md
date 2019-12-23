@@ -24,7 +24,7 @@ In [constants.py](https://github.com/andrebrener/fb_group_members/blob/master/co
   because members are loaded as the web is navigated.
 - `GROUP_MEMBERS_LINK`: The link of the group members. Eg: `https://www.facebook.com/groups/<group_id>/members/`.
 
-### 3. Get names of group members :)
+### 4. Get names of group members :)
 
 - Run [get_members.py](https://github.com/andrebrener/fb_group_members/blob/master/get_members.py).
 - You will see an automated browser entering to Facebook, logging in, entering the group and scroll down.
