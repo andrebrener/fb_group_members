@@ -1,0 +1,15 @@
+# Scraper output
+results/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Local credentials / overrides
+# NOTE: constants.py is tracked with PLACEHOLDER values only.
+# Never commit real Facebook credentials into it (see README warning).
+.env
