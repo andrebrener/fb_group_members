@@ -6,6 +6,7 @@ import pandas as pd
 
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 
 from constants import GROUP_MEMBERS_LINK, NUMBER_OF_SCROLLS, PASS, USER
 
@@ -15,21 +16,21 @@ def get_names():
     chrome_options = Options()
     prefs = {"profile.default_content_setting_values.notifications": 2}
     chrome_options.add_experimental_option("prefs", prefs)
-    driver = Chrome(chrome_options=chrome_options)
+    driver = Chrome(options=chrome_options)
 
     driver.get('https://www.facebook.com')
 
     sleep(2)
 
-    username_box = driver.find_element_by_id('email')
+    username_box = driver.find_element(By.ID, 'email')
     username_box.send_keys(USER)
     sleep(2)
 
-    password_box = driver.find_element_by_id('pass')
+    password_box = driver.find_element(By.ID, 'pass')
     password_box.send_keys(PASS)
     sleep(1)
 
-    login_box = driver.find_element_by_id('loginbutton')
+    login_box = driver.find_element(By.ID, 'loginbutton')
     login_box.click()
 
     sleep(1)
@@ -43,15 +44,22 @@ def get_names():
         )
         sleep(1)
 
-    members = driver.find_elements_by_xpath(
-        "//div[contains(@class, 'clearfix') and contains(@class, '_60rh')]"
+    # NOTE: these selectors target Facebook's 2019 DOM and are almost
+    # certainly stale. See the "Known limitations" section of the README.
+    members = driver.find_elements(
+        By.XPATH,
+        "//div[contains(@class, 'clearfix') and contains(@class, '_60rh')]",
     )
 
     names = []
     for d in members:
-        link_list = d.find_elements_by_tag_name('a')
+        link_list = d.find_elements(By.TAG_NAME, 'a')
+        if len(link_list) < 2:
+            # A member card without the expected anchors; skip it rather
+            # than raising IndexError.
+            continue
         name = link_list[1].text
-        if '\n' in name:
+        if '\n' in name and len(link_list) > 2:
             name = link_list[2].text
 
         names.append(name)
@@ -69,4 +77,6 @@ def get_group_members():
     file_name = os.path.join('results', 'group_members.csv')
     df.drop_duplicates().to_csv(file_name, index=False)
 
-    return None
+
+if __name__ == '__main__':
+    get_group_members()
